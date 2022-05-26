@@ -13,9 +13,11 @@ struct InputView {
             throw InputError.invalidInput
         }
         
-        return Players(input.components(separatedBy: ",").map { (name) in
+        let players = input.components(separatedBy: ",").map { (name) in
             Player(name: name.trimmingCharacters(in: .whitespaces))
-        })
+        }
+        
+        return Players(players)
     }
     
     static func readDrawYesOrNo(name: String) throws -> Bool {
