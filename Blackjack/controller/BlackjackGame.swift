@@ -28,6 +28,7 @@ struct BlackjackGame {
         try players.askContinue { (result, player) in
             if result == false || player.keepDeal == false {
                 player.playing = false
+                return try ask()
             }
             
             try player.deal(deck.drawCard())
