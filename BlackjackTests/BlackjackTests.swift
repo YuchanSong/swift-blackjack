@@ -13,7 +13,7 @@ class BlackjackTests: XCTestCase {
         let deck: Deck = Deck()
         
         // when
-        let deckCount: Int = 52
+        let deckCount: Int = Constants.cardRange.count
         
         // then
         XCTAssertTrue(deckCount == deck.count)
