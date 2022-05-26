@@ -33,15 +33,6 @@ struct ResultView {
     }
     
     static func printGameResult(of players: Players) {
-        print("")
-        for player in players.players {
-            let cardInfo = players.players.filter {
-                $0.name == player.name
-            }.map {
-                String(describing: $0)
-            }.joined(separator: "")
-            
-            print("\(cardInfo) - 결과: \(player.result)")
-        }
+        print("\n\(players.resultDescription)")
     }
 }

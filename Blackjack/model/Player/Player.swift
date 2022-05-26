@@ -27,6 +27,14 @@ class Player: Playable {
     func deal(_ element: Card) {
         cards.add(element)
     }
+    
+    var keepDeal: Bool {
+        result < Constants.winningNumber
+    }
+    
+    var resultDescription: String {
+        String(format: "%@ - 결과 %i", debugDescription, result)
+    }
 }
 
 extension Player: CustomDebugStringConvertible {

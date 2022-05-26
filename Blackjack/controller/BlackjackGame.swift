@@ -26,13 +26,13 @@ struct BlackjackGame {
     
     func ask() throws {
         try players.askContinue { (result, player) in
-            if result {
-                try player.deal(deck.drawCard())
-                ResultView.printPlayerCards(of: player.name, players: players)
-                return try ask()
-            } else {
+            if result == false || player.keepDeal == false {
                 player.playing = false
             }
+            
+            try player.deal(deck.drawCard())
+            ResultView.printPlayerCards(of: player.name, players: players)
+            return try ask()
         }
     }
     

@@ -6,30 +6,36 @@
 //
 
 struct Players {
-    var players: [Player]
+    private var values: [Player]
     
     init(_ players: [Player]) {
-        self.players = players
+        self.values = players
     }
     
     func handoutAllPlayers(deck: Deck) throws {
-        try players.forEach { (player) in
+        try values.forEach { (player) in
             let card = try deck.drawCard()
             player.deal(card)
         }
     }
     
     func askContinue(completion: (Bool, Player) throws -> ()) throws {
-        for player in players where player.playing && player.result < Constants.winningNumber {
+        for player in values where player.playing && player.keepDeal {
             let ask: Bool = try InputView.readDrawYesOrNo(name: player.name)
             try completion(ask, player)
         }
+    }
+    
+    var resultDescription: String {
+        values.map {
+            $0.resultDescription
+        }.joined(separator: "\n")
     }
 }
 
 extension Players: CustomDebugStringConvertible {
     var debugDescription: String {
-        String(describing: players)
+        String(describing: values)
     }
 }
 
@@ -37,7 +43,7 @@ extension Players {
     func customMap<T>(_ Element: (Player) -> T) -> [T] {
         var result: [T] = []
         
-        players.forEach { (player) in
+        values.forEach { (player) in
             result.append(Element(player))
         }
         
@@ -47,7 +53,7 @@ extension Players {
     func customFilter(_ completion: ((_ item: Player) -> Bool)) -> [Player] {
         var res: [Player] = []
         
-        players.forEach { (player) in
+        values.forEach { (player) in
             if completion(player) {
                 res.append(player)
             }
