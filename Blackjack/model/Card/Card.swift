@@ -13,7 +13,7 @@ struct Card {
         cardElement.point
     }
     
-    init(_ cardType: CardType, _ cardElement: CardElement) {
+    init(type cardType: CardType, element cardElement: CardElement) {
         self.cardType = cardType
         self.cardElement = cardElement
     }

@@ -19,7 +19,7 @@ class Deck: Deckable {
     init() {
         self.deck = CardType.allCases.flatMap { (cardType) in
             CardElement.allCases.map { (cardElement) in
-                Card(cardType, cardElement)
+                Card(type: cardType, element: cardElement)
             }
         }.shuffled()
     }
