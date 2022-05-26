@@ -25,14 +25,13 @@ struct BlackjackGame {
     }
     
     func ask() throws {
-        try players.askContinue { (result, player) in
-            if result == false || player.keepDeal == false {
+        try players.askContinue { (keepDraw, player) in
+            if keepDraw == false || player.keepDeal == false {
                 player.playing = false
-                return try ask()
+            } else {
+                try player.deal(deck.drawCard())
+                ResultView.printPlayerCards(of: player.name, players: players)
             }
-            
-            try player.deal(deck.drawCard())
-            ResultView.printPlayerCards(of: player.name, players: players)
             return try ask()
         }
     }
