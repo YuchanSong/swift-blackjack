@@ -11,9 +11,9 @@ do {
     let game = BlackjackGame(players: players)
     try game.startGame()
 } catch let error as CardError {
-    print(error)
+    print(error.errorDescription)
 } catch let error as InputError {
-    print(error)
+    print(error.errorDescription)
 } catch let error {
     print(error.localizedDescription)
 }
